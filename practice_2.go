@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+)
 
 func main() {
 	// 	print_1()
@@ -27,19 +30,45 @@ func main() {
 
 //===========================================================
 
-loges("vahid" , "lotfi" ,1371 , 32 , true , "hasan" , "mehtari" , 28)
+// loges("vahid" , "lotfi" ,1371 , 32 , true , "hasan" , "mehtari" , 28)
+
+//======================================================================
+
+// sumetion1 , multiply1 := calculator(12,12,12,12,121,2,12,12,12,12,12 ,0)
+// sumetion2 , multiply2 := calculator(1,2)
+
+// fmt.Printf("sum : %d, mul : %d\n" , sumetion1 , multiply1)
+// fmt.Printf("sum : %d, mul : %d" , sumetion2, multiply2)
+
+
+//==========================================================
+
 
 
 }
 
 
-func loges (values ...interface{}) {
-	for Index , val := range values {
-		fmt.Printf("index : %v, value : %v\n", Index , val)
-		println("index : ", Index , "value : ", val) // خروجی این تابع قابل فهم نمی باشد  حتما باید از پکیج اف ام تی استفاده کنیم
+// func calculator(numbers ...int) (sum int , mul int ) { // جنس نامبر از نوع اسلایس است
+// 	mul = 1
+// 	for _ , number := range numbers {
+// 		sum += number
+// 		mul *= number
+// 	}
+// 	return 
 
-	}
-}
+// }
+
+
+
+
+
+// func loges (values ...interface{}) {
+// 	for Index , val := range values {
+// 		fmt.Printf("index : %v, value : %v\n", Index , val)
+// 		println("index : ", Index , "value : ", val) // خروجی این تابع قابل فهم نمی باشد  حتما باید از پکیج اف ام تی استفاده کنیم
+
+// 	}
+// }
 
 
 
