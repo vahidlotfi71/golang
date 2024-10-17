@@ -1,108 +1,165 @@
-package main 
+package main
 
 import (
 	"fmt"
 )
 
-type Room struct {  
-	ID int 
-	Type string
-	Status bool  // true for reserved and false for available
+type Room struct {
+	ID       int
+	Type     string
 	BedCount int
-	Price int
+	Status   bool
+	Price    int
 }
 
-var Rooms []Room = GenerateRooms()  // list of rooms
+var Rooms []Room = GenerateRooms()
+
 
 func main() {
-	input := "" // گرفتن ورودی
+	input :=""
 
 	for input != "exit"{
-		fmt.Println("Enter a command: ")
+		fmt.Println("Enter Command : ")
 		fmt.Println("1 : Room list")
-		fmt.Println("2 : Add Room")
-		fmt.Println("3 : reserve Room")
+		fmt.Println("2 : Add room")
+		fmt.Println("3 : reserve room")
 
 		fmt.Scan(&input)
 
 		switch input {
-		case "1" :
+		case "1":
 			GetRoomList()
-		case "2" :
+		case "2":
 			AddRoom()
-		case "3" :
+		case "3":
 			ReserveRoom()
-		case "exit" :
-			fmt.Println("Exiting ....")
+		case "Exit":
+			println("Exiting ...")
 			break
 		default :
-			fmt.Println("Invalid command")
-
-		}
-
-
-
+				println("invalid command")
 	}
 }
+}
+
+
 
 func GetRoomList(){
-	for _ , room := range Rooms{
-		fmt.Printf("%+v\n", room)  // بعلاوه وی یعنی همه یاطلاعات ان را نمایش بده 
+	for _ , room :=range Rooms {
+		fmt.Printf("%+v\n", room)
 	}
 }
 
-func GetRoomFromInput() Room{  // خروجی این تابع یک رووح است
-	var room Room = Room{Status: false} 
-	fmt.Println("Enter room information line by line : (ID , Type , BedCount , Price)")
 
+
+func GetRoomFromInput() Room {
+	var room Room = Room{Status : false}
+	fmt.Println("Enter Room information line by line (ID , Type ,BedCount ,Price")
 	fmt.Scan(&room.ID)
 	fmt.Scan(&room.Type)
 	fmt.Scan(&room.BedCount)
-	fmt.Scan(&room.Price) 
+	fmt.Scan(&room.Price)
 
 	return room
 
 }
 
-func AddRoom(){
+
+
+func AddRoom() {
 	room := GetRoomFromInput()
 	Rooms = append(Rooms, room)
 }
 
-func ReserveRoom(id int , night int , personCount int ){ // وقتی می خواهیم یک روم را رزرو کنیم نیاز داریم بکسری اطلاعات را از کاربر بگیریم 
-	room := GetRoom(id)
 
+
+func ReserveRoom(){
+	id := 0
+	nights := 0
+	personCount := 0
+
+	fmt.Println("Enter room ID for reservation: ")
+	fmt.Scan(&id)
+
+	room := GetRoom(id)
 	if room == nil {
-		fmt.Println("No room found")
+		fmt.Println("Room not found")
 		return
+	}
+	if room.Status == true {
+		fmt.Println("Room already reserved")
+		return
+	}
+
+	fmt.Println("Enter reserve information line by line (nights and personsCount)")
+	fmt.Scan(&nights)
+	fmt.Scan(&personCount)
+
+	roomPrice, totalPrice  , tax , discoutAmount := calculateRoomPrice(*room , nights ,personCount)
+	room.Status = true
+
+	fmt.Printf("RoomPrice: %f, TotalPrice: %f, tax: %f,discoutAmount: %f\n", roomPrice, totalPrice, tax , discoutAmount)
+	
+}	
+
+
+
+
+func calculateRoomPrice(room Room  , nights int , personCount int )(roomPrice float64 , totalPrice float64  , tax float64 ,discountAmount float64 ){
+	discountPercentage := 0.0
+	if (nights >= 7 && nights <=15){
+		discountPercentage = 0.10
+	}else if (nights > 15 && nights <= 20){
+		discountPercentage = 0.15
+	}else if (nights >21){
+		discountPercentage = 0.20}
+	
+	switch room.Type{
+	case "single":
+		roomPrice = float64(nights * personCount *room.Price)
+
+	case "double":
+		roomPrice = float64(nights * personCount * room.Price) 
+
+	case "suite":
+		roomPrice = float64(nights * personCount * room.Price)
+		
+	}
+	
+	tax = roomPrice * .9
+	discountAmount = roomPrice * discountPercentage
+	totalPrice = roomPrice + tax - discountAmount
+
+	return
+
 }
 
-func GetRoom (id int) *Room {
-	for i := 0 ; i <= len(Rooms) ; i++{
+
+
+func GetRoom(id int) *Room {
+	for i:= 0 ; i <=len(Rooms) ; i++ {
 		if Rooms[i].ID == id {
-			return &Rooms[i]
+			return &Rooms[i]	
 		}
 	}
-	return nil
+	return nil	
 }
 
-func CalculateRoomPrice(){}
 
-func GenerateRooms() []Room {  //   اینجا اتاق هامون را می سازیم ویک اسلایس از جنس روم را بر میگرداند
-	rooms := []Room{} // رومز یک اسلایس است که اینجا ایجاد کردیم
 
-	rooms = append(rooms,Room{ID: 1 , Type: "single" , Status: false, BedCount: 2 , Price: 100})
-	rooms = append(rooms,Room{ID: 2 , Type: "single" , Status: false, BedCount: 3 , Price: 200})
-	rooms = append(rooms,Room{ID: 3 , Type: "single" , Status: false, BedCount: 4  , Price: 250})
-	rooms = append(rooms,Room{ID: 4 , Type: "duble" , Status: true, BedCount: 2 , Price: 300})
-	rooms = append(rooms,Room{ID: 5 , Type: "duble" , Status: false, BedCount: 3 , Price: 400})
-	rooms = append(rooms,Room{ID: 6 , Type: "duble" , Status: false, BedCount: 4  , Price: 450})
-	rooms = append(rooms,Room{ID: 7 , Type: "suite" , Status: true, BedCount: 2 , Price: 500})
-	rooms = append(rooms,Room{ID: 8 , Type: "suite" , Status: false, BedCount: 3 , Price: 600})
-	rooms = append(rooms,Room{ID: 9 , Type: "suite" , Status: false, BedCount: 4  , Price: 750})
- 
+func GenerateRooms() []Room {
+	rooms := []Room{}
+
+	rooms = append(rooms, Room{ID: 1, Type: "single", BedCount: 1, Status: false, Price: 100})
+	rooms = append(rooms, Room{ID: 2, Type: "single", BedCount: 2, Status: false, Price: 200})
+	rooms = append(rooms, Room{ID: 3, Type: "single", BedCount: 1, Status: false, Price: 100})
+	rooms = append(rooms, Room{ID: 4, Type: "double", BedCount: 2, Status: false, Price: 300})
+	rooms = append(rooms, Room{ID: 5, Type: "double", BedCount: 3, Status: false, Price: 400})
+	rooms = append(rooms, Room{ID: 6, Type: "double", BedCount: 4, Status: false, Price: 500})
+	rooms = append(rooms, Room{ID: 7, Type: "suite", BedCount: 4, Status: false, Price: 700})
+	rooms = append(rooms, Room{ID: 8, Type: "suite", BedCount: 5, Status: false, Price: 800})
+	rooms = append(rooms, Room{ID: 9, Type: "suite", BedCount: 5, Status: false, Price: 900})
+	rooms = append(rooms, Room{ID: 10, Type: "suite", BedCount: 6, Status: false, Price: 1000})
+
 	return rooms
 }
-
-
-
