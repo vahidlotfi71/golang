@@ -20,36 +20,53 @@ func main() {
 
 	//====================================================================
 
-	oder1 , finalPrice , tax := calculate("single" , 1 , 1)
+	// oder1 , finalPrice , tax := calculate("single" , 1 , 1)
 
-	fmt.Printf("price : %v ,tax: %.2f , totalPrice : %f\n", finalPrice, tax , oder1)
+	// fmt.Printf("price : %v ,tax: %.2f , totalPrice : %f\n", finalPrice, tax , oder1)
+
+
+//===========================================================
+
+loges("vahid" , "lotfi" ,1371 , 32 , true , "hasan" , "mehtari" , 28)
+
 
 }
 
 
+func loges (values ...interface{}) {
+	for Index , val := range values {
+		fmt.Printf("index : %v, value : %v\n", Index , val)
+		println("index : ", Index , "value : ", val) // خروجی این تابع قابل فهم نمی باشد  حتما باید از پکیج اف ام تی استفاده کنیم
 
-func calculate(roomType string , night int , personNumber int ) (totalPrice float64, price int , tax float64){ // همین جا خورجی هامون را مشخص می کنم
-
-	switch roomType {
-	case "single":
-		price = night * personNumber * 100
-		
-	case "duble":
-		price = night * personNumber * 200
-	
-	case "suite":
-		price = night * personNumber * 400
-	default :
-		println("unknown roomType value")
-		break
 	}
-	price = price
-	tax = float64(price) * 0.09
-	totalPrice = float64(price) + float64(tax)
-
-	return  // دیگر دراینجاخروجی هامون رانمی اوریم
-
 }
+
+
+
+
+
+// func calculate(roomType string , night int , personNumber int ) (totalPrice float64, price int , tax float64){ // همین جا خورجی هامون را مشخص می کنم
+
+// 	switch roomType {
+// 	case "single":
+// 		price = night * personNumber * 100
+		
+// 	case "duble":
+// 		price = night * personNumber * 200
+	
+// 	case "suite":
+// 		price = night * personNumber * 400
+// 	default :
+// 		println("unknown roomType value")
+// 		break
+// 	}
+// 	price = price
+// 	tax = float64(price) * 0.09
+// 	totalPrice = float64(price) + float64(tax)
+
+// 	return  // دیگر دراینجاخروجی هامون رانمی اوریم
+
+// }
 
 
 
