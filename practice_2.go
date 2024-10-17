@@ -1,25 +1,61 @@
-package main 
+package main
 
-func main(){
-	print_1()
-	println(print_2())
-	println(print_3("hello vahid"))
-	println(print_4("Hello"))
+import "fmt"
+
+func main() {
+	// 	print_1()
+	// 	println(print_2())
+	// 	println(print_3("hello vahid"))
+	// 	println(print_4("Hello"))
+
+	// }
+
+	//================================================================
+
+	order_1, tax_1 := calculateRoomPrice("silge", 2, 2)
+	order_2 , tax_2 := calculateRoomPrice("suite",3 , 4)
+
+	fmt.Printf("Oder_1: %v , tax: %.2f\n", order_1, tax_1)
+	fmt.Printf("Oder_2: %v ,tax: %.2f\n", order_2, tax_2)
 
 }
 
-func print_1(){
-	println("hello vahid")
-}
+func calculateRoomPrice(roomType string, night int, personNumber int) (int, float64) {
+	var price int
+	var tax float64
 
-func print_2() string{
-	return	"hello vahid"
-}
+	switch roomType {
+	case "silge":
+			price = night * personNumber * 100
 
-func print_3(Enter string) string{
-	return Enter
-}
+	case "dubble":
+			price = night * personNumber * 200
+		
+	case "suite":
+			price = night * personNumber * 400
+	default :
+			println("Unknown type for roomtype")
+			break
+	}
 
-func print_4(Enter string) string{
-	return Enter + " " +"vahid"
-}
+	
+	tax = float64(price) * 0.09
+	price = price + (int(tax))
+	return price, tax
+}	
+
+// func print_1(){
+// 	println("hello vahid")
+// }
+
+// func print_2() string{
+// 	return	"hello vahid"
+// }
+
+// func print_3(Enter string) string{
+// 	return Enter
+// }
+
+// func print_4(Enter string) string{
+// 	return Enter + " " +"vahid"
+// }
