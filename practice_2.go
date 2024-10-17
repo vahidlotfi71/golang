@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"sort"
+	//"sort"
 )
 
 func main() {
@@ -44,30 +44,56 @@ func main() {
 //==========================================================
 
 
-number_1 := []int{12,1,2,3,65,32,53,1,5,8,34,26}
-number_2 := []int{12,1,2,3,65,32,53,1,5,8,34,26}
+// number_1 := []int{12,1,2,3,65,32,53,1,5,8,34,26}
+// number_2 := []int{12,1,2,3,65,32,53,1,5,8,34,26}
 
 
 
-sort.Slice(number_1, func(i , j int )bool{
-	return number_1[i] > number_1[j]	
-})
+// sort.Slice(number_1, func(i , j int )bool{
+// 	return number_1[i] > number_1[j]	
+// })
 
-fmt.Println("number_1 : ", number_1)
-fmt.Println("number_2 : ", number_2)
+// fmt.Println("number_1 : ", number_1)
+// fmt.Println("number_2 : ", number_2)
 
-sortingFunction := func (a, b int) bool{
-	return number_2[a] > number_2[b]
+// sortingFunction := func (a, b int) bool{
+// 	return number_2[a] > number_2[b]
+// }
+
+// sort.Slice(number_2 , sortingFunction)
+
+// fmt.Printf("number_1: %d\n", number_1)
+// fmt.Printf("number_2: %d\n", number_2)
+
+//====================================================
+
+
+//به فانکشنن هایی که درون یه فانشن دیگر تعریف می شود این لاین فانکشن هم گفته می شود 
+
+
+func() {
+	fmt.Println("Hello, world!")
+}() // با پارانتز تابع را کال می کنیم
+
+my_fumction := func(){
+	fmt.Println("Hello vahid how you are")
 }
 
-sort.Slice(number_2 , sortingFunction)
+my_fumction()
 
-fmt.Printf("number_1: %d\n", number_1)
-fmt.Printf("number_2: %d\n", number_2)
-
+fmt.Println("sum : ",func(numbers... int)(int){
+	var total int 
+	for _, value := range numbers {
+		total += value
+	}
+	return total
+}(1,2,3,4,5,6	))
 
 
 }
+
+
+
 
 
 // func calculator(numbers ...int) (sum int , mul int ) { // جنس نامبر از نوع اسلایس است
