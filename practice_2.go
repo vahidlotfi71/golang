@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"time"
 	//"sort"
 )
 
@@ -71,30 +72,45 @@ func main() {
 //به فانکشنن هایی که درون یه فانشن دیگر تعریف می شود این لاین فانکشن هم گفته می شود 
 
 
-func() {
-	fmt.Println("Hello, world!")
-}() // با پارانتز تابع را کال می کنیم
+// func() {
+// 	fmt.Println("Hello, world!")
+// }() // با پارانتز تابع را کال می کنیم
 
-my_fumction := func(){
-	fmt.Println("Hello vahid how you are")
+// my_fumction := func(){
+// 	fmt.Println("Hello vahid how you are")
+// }
+
+// my_fumction()
+
+// fmt.Println("sum : ",func(numbers... int)(int){
+// 	var total int 
+// 	for _, value := range numbers {
+// 		total += value
+// 	}
+// 	return total
+// }(1,2,3,4,5,6	))
+
+//==============================================================
+
+firstname := "vahid"
+names := []string{"hasan", "ahmad", "ali", "farhad", "shima","sorosh", "reza"}
+
+printfirstname := func(){
+	fmt.Println("First name : ",firstname)
+}
+printfirstname()
+
+//=======================================================
+
+for index , name := range names {
+	go func(i int , item string) {   //  باعث اجراشدن به صرت هم روند می شود دیگر تابع مین منتظر اجرای این فانکشن نمی ماند
+		fmt.Println("index: ",i, "name",item)
+	}(index , name)
 }
 
-my_fumction()
-
-fmt.Println("sum : ",func(numbers... int)(int){
-	var total int 
-	for _, value := range numbers {
-		total += value
-	}
-	return total
-}(1,2,3,4,5,6	))
-
+time.Sleep(time.Second *2)
 
 }
-
-
-
-
 
 // func calculator(numbers ...int) (sum int , mul int ) { // جنس نامبر از نوع اسلایس است
 // 	mul = 1
