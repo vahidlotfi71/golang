@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"time"
+	// "time"
 	//"sort"
 )
 
@@ -92,24 +92,35 @@ func main() {
 
 //==============================================================
 
-firstname := "vahid"
-names := []string{"hasan", "ahmad", "ali", "farhad", "shima","sorosh", "reza"}
+// firstname := "vahid"
+// names := []string{"hasan", "ahmad", "ali", "farhad", "shima","sorosh", "reza"}
 
-printfirstname := func(){
-	fmt.Println("First name : ",firstname)
-}
-printfirstname()
+// printfirstname := func(){
+// 	fmt.Println("First name : ",firstname)
+// }
+// printfirstname()
+
+// //=======================================================
+
+// for index , name := range names {
+// 	go func(i int , item string) {   //  باعث اجراشدن به صرت هم روند می شود دیگر تابع مین منتظر اجرای این فانکشن نمی ماند
+// 		fmt.Println("index: ",i, "name",item)
+// 	}(index , name)
+// }
+
+// time.Sleep(time.Second *2)
+
 
 //=======================================================
 
-for index , name := range names {
-	go func(i int , item string) {   //  باعث اجراشدن به صرت هم روند می شود دیگر تابع مین منتظر اجرای این فانکشن نمی ماند
-		fmt.Println("index: ",i, "name",item)
-	}(index , name)
+defer fmt.Println("lotfi")
+defer fmt.Println("vahid")
+
+for i := 0 ; i < 10 ; i++ {	
+	defer fmt.Println(i)
 }
 
-time.Sleep(time.Second *2)
-
+defer fmt.Println("Hello")
 }
 
 // func calculator(numbers ...int) (sum int , mul int ) { // جنس نامبر از نوع اسلایس است
